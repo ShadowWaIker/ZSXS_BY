@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>登陆丨离校手续办理丨忻州师范学院</title>
+<link rel="stylesheet" href="css/style.css">
+<body>
+
+<div class="login-container">
+	<h1>忻州师范学院</h1>
+	
+	<div class="connect">
+		<p>2017届毕业生离校手续办理<br><br>开放时间：2017/06/15 08:00 ~ 2017/06/20 12:00</p>
+	</div>
+	
+	<form action="login.php" method="post" id="loginForm">
+		<div>
+			<input type="text" name="username" class="username" placeholder="学&nbsp;号" autocomplete="off"/>
+		</div>
+		<div>
+			<input type="text" name="idcard" class="username" placeholder="身份证号码" autocomplete="off"/>
+		</div>
+		<!--<div>
+			<input type="password" name="password" class="password" placeholder="身份证号码" oncontextmenu="return false" onpaste="return false" />
+		</div>-->
+		<button id="submit" type="submit">登&nbsp;陆</button>
+	</form>
+	<div style="height:30px"></div>
+<!--
+	<a href="register.html">
+		<button type="button" class="register-tis">还有没有账号？</button>
+	</a>
+-->
+</div>
+
+</body>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/common.js"></script>
+<!--背景图片自动更换-->
+<!--
+<script src="js/supersized.3.2.7.min.js"></script>
+<script src="js/supersized-init.js"></script>
+-->
+<!--表单验证-->
+<script src="js/jquery.validate.min.js?var1.14.0"></script>
+</html>

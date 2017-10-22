@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>邮寄信息丨离校手续办理丨忻州师范学院</title>
+<link rel="stylesheet" href="css/style.css">
+<body>
+<div class="register-container">
+	<h1>忻州师范学院</h1>
+	
+	<div class="connect">
+		<p>2017届毕业生离校手续办理&nbsp;|&nbsp;邮寄信息<!--<br><br>系统开放时间：2017/06/15 ~ 2017/06/19--></p>
+	</div>
+	
+	<form action="mail.php" method="post" id="mailMsgForm">
+		<div style="height:188px;border: 1px solid rgba(255, 255, 255, 0.38);background: rgba(45, 45, 45, 0.15);">
+			<div style="margin-top:20px">邮寄项目</div>
+			<div><input name="checkbox[]" type="checkbox" value="毕业证" style="width:20px;height:20px;margin-left:-80px;"/><div style="margin-top:-20px;">毕&nbsp;业&nbsp;证</div></div> 
+			<div><input name="checkbox[]" type="checkbox" value="学位证" style="width:20px;height:20px;margin-left:-80px;"/><div style="margin-top:-20px;">学&nbsp;位&nbsp;证</div></div> 
+			<div><input name="checkbox[]" type="checkbox" value="报到证" style="width:20px;height:20px;margin-left:-80px;"/><div style="margin-top:-20px;">报&nbsp;到&nbsp;证</div></div> 
+		</div>
+		<div>
+			<input type="text" name="name" class="username" placeholder="收件人姓名" autocomplete="off"/>
+		</div>
+		<div>
+			<input type="text" name="address" class="username" placeholder="收件地址" autocomplete="off"/>
+		</div>
+		<div>
+			<input type="text" name="phone_number" id="phone_number" class="phone_number" placeholder="收件人手机号码" autocomplete="off" id="number"/>
+		</div>
+		<div>
+			<input type="text" name="code" class="username" placeholder="验&nbsp;证&nbsp;码" autocomplete="off"  style="width:100px;margin-left:-170px;">
+			<button type="button" id="getCode" class="register-tis" style="width:160px;margin-left:140px;margin-top:-44px;display:block;">发送验证码</button>
+			<label id="code-error" class="error" for="code" style="display: none;"></label>
+		</div>
+		<!--
+		<div>
+			<input type="text" name="code" class="username" placeholder="验证码" autocomplete="off"  style="width:100px;margin-left:-170px;">
+		</div>
+		<div>
+			<button type="button" class="register-tis" style="width:160px;margin-left:140px;margin-top:-44px;display:block;">发送验证码</button>
+		</div>-->
+		<div>
+			<input type="text" name="phone_number_bak" id="phone_number_bak" class="phone_number_bak" placeholder="其他联系电话" autocomplete="off" id="number"/>
+		</div>
+		<button id="submit" type="submit">提&nbsp;交</button>
+	</form>
+	<div style="margin-top:10px;">
+		<button type="button" id="logout" class="register-tis">> 退出登录 <</button>
+	</div>
+	<div id="end" style="height:30px"></div>
+</div>
+
+</body>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/common.js"></script>
+<!--背景图片自动更换-->
+<!--
+<script src="js/supersized.3.2.7.min.js"></script>
+<script src="js/supersized-init.js"></script>
+-->
+<!--表单验证-->
+<script src="js/jquery.validate.min.js?var1.14.0"></script>
+ <script>
+  $(function(){
+   //获取短信验证码
+   var validCode=true;
+   $("#getCode").click (function () {
+    var time=60;
+    var code=$(this);
+    if (validCode) {
+     validCode=false;/*
+     alert($("#phone_number").val());*/
+     $.post("./sendCode.php",
+    {
+      phone: $("#phone_number").val()
+    },
+    function(data,status){
+    	console.log('请求状态：'+status +'\n返回信息：'+data);
+    	alert(data);
+    });
+     var t=setInterval(function () {
+      time--;
+      code.html(time+" 秒后重新发送");
+      if (time==0) {
+       clearInterval(t);
+       code.html("重新发送验证码");
+       validCode=true;
+      }
+     },1000)
+    }
+   })
+   $("#logout").click (function () {
+    $.post("./logout.php",{},function(data){$("#end").html(data);});
+    })
+  })
+ </script>
+</html>
